@@ -169,8 +169,32 @@
             font-weight: bold;
         }
 
-        /* 모바일 화면에서는 이미지를 가운데로 */
-        @media (max-width: 600px) {
+        /* 모바일 및 태블릿 화면 설정 */
+        @media (max-width: 768px) {
+            /* 1. 레이아웃을 세로 방향으로 변경 (본문 위, 사이드바 아래) */
+            .container {
+                flex-direction: column;
+            }
+
+            /* 2. 사이드바 스타일 조정 */
+            .sidebar {
+                width: 100%;             /* 너비를 화면 꽉 차게 */
+                border-left: none;       /* 기존 왼쪽 선 제거 */
+                border-top: 1px solid #ddd; /* 위쪽 선 추가 (본문과의 구분선) */
+                box-sizing: border-box;  /* 패딩이 너비에 포함되도록 설정 */
+            }
+
+            /* 3. 사이드바 목록 높이 제한 해제 (선택사항: 목록이 길면 스크롤 유지, 짧으면 다 보여주기) */
+            #sidebar-doc-list {
+                max-height: 300px; /* 모바일에서는 목록 높이를 적당히 제한 */
+            }
+
+            /* 4. 메인 콘텐츠 여백 조정 */
+            .main-content {
+                padding: 15px; /* 모바일에서는 여백을 조금 줄임 */
+            }
+
+            /* 5. (기존 코드) 프로필 박스 조정 */
             .profile-box {
                 float: none;
                 width: 100%;
