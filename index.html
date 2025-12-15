@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>초능력 연구 도시 위키</title>
     <style>
-        /* 스타일은 기존과 동일하게 유지 */
+        /* 기본 스타일 유지 */
         html { scroll-behavior: smooth; }
         :root { --namu-green: #00A495; --link-color: #0275d8; --bg-gray: #f0f0f0; --border-color: #ccc; }
         body { font-family: 'Malgun Gothic', 'Noto Sans KR', sans-serif; margin: 0; padding: 0; background-color: var(--bg-gray); color: #373a3c; line-height: 1.6; }
@@ -16,7 +16,6 @@
         .main-content { flex: 1; padding: 30px; max-width: 800px; }
         .sidebar { width: 220px; background-color: #f9f9f9; border-left: 1px solid #ddd; padding: 20px; flex-shrink: 0; }
         
-        /* 사이드바 타이틀에 커서 포인터 추가 */
         .sidebar-title { font-weight: bold; color: #2e4e3f; border-bottom: 2px solid var(--namu-green); padding-bottom: 5px; margin-bottom: 10px; font-size: 1.1rem; cursor: pointer; }
         .sidebar-title:hover { opacity: 0.8; }
 
@@ -28,6 +27,8 @@
         #sidebar-doc-list::-webkit-scrollbar { width: 6px; }
         #sidebar-doc-list::-webkit-scrollbar-thumb { background-color: #ccc; border-radius: 4px; }
         #sidebar-doc-list::-webkit-scrollbar-track { background-color: transparent; }
+        
+        /* 위키 본문 스타일 */
         .title-area { border-bottom: 2px solid gray; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: flex-end; }
         .title-area h1 { margin: 0; font-size: 2.2rem; font-weight: normal; }
         .action-buttons button { background: white; border: 1px solid #ccc; padding: 5px 10px; cursor: pointer; font-size: 0.8rem; }
@@ -51,11 +52,49 @@
         .profile-table td { padding: 7px 10px; border-bottom: 1px solid #eee; text-align: left; color: #333; vertical-align: middle; }
         .profile-table tr:last-child th, .profile-table tr:last-child td { border-bottom: none; }
         
-        /* 메인 화면 문서 목록 스타일 */
-        .doc-index-list { list-style: none; padding: 0; }
-        .doc-index-list li { margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
-        .doc-index-list li a { font-size: 1.2rem; font-weight: bold; display: block; }
-        .doc-index-list li a:hover { color: #0056b3; }
+        /* ---------------------------------------------------- */
+        /* 접기/펼치기 및 문서 목록 스타일 */
+        /* ---------------------------------------------------- */
+        .doc-index-list { list-style: none; padding: 0; margin-bottom: 20px; transition: all 0.3s; }
+        .doc-index-list li { margin-bottom: 5px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+        .doc-index-list li a { font-size: 1.1rem; font-weight: bold; display: block; padding: 5px; }
+        .doc-index-list li a:hover { color: #0056b3; background-color: #f8f9fa; }
+
+        /* 카테고리 헤더 스타일 (클릭 가능) */
+        .category-header {
+            cursor: pointer;
+            user-select: none; /* 드래그 방지 */
+            display: flex;
+            align-items: center;
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        .category-header:hover {
+            color: var(--namu-green);
+            border-color: var(--namu-green);
+        }
+
+        /* 삼각형 아이콘 (CSS로 생성) */
+        .category-header::before {
+            content: '▶';
+            display: inline-block;
+            margin-right: 10px;
+            font-size: 0.8em;
+            color: #666;
+            transition: transform 0.2s ease;
+            transform: rotate(90deg); /* 기본: 아래쪽(펼침) */
+        }
+        
+        /* 접힌 상태의 삼각형 (오른쪽) */
+        .category-header.collapsed::before {
+            transform: rotate(0deg);
+        }
+
+        /* 목록 숨김 클래스 */
+        .category-list.hidden {
+            display: none;
+        }
 
         @media (max-width: 768px) {
             .container { flex-direction: column; }
@@ -86,7 +125,7 @@
 </div>
 
 <script type="module">
-    // 1. 문서 목록 데이터
+    // 1. 문서 목록 데이터 (ID: 제목)
     const pageList = {
         "superpower": "초능력",
         "city": "초능력 연구 도시",
@@ -128,6 +167,34 @@
         "calamity": "중압의 재앙"
     };
 
+    // 2. 카테고리별 분류 정의 (ID 목록)
+    const docCategories = [
+        {
+            title: "초능력 및 설정",
+            ids: ["superpower", "supertool"]
+        },
+        {
+            title: "정치, 국가 및 지명",
+            ids: ["korea", "city", "isolation", "pleasurecity"]
+        },
+        {
+            title: "기업",
+            ids: ["daejeong", "fullrecovery", "rakwon", "medicalcenter", "kaguard"]
+        },
+        {
+            title: "집단 및 조직",
+            ids: ["hanul", "nebula", "purehuman", "dawnoffreedom", "yeollak", "predator", "steelhyena", "meari", "buddhism"]
+        },
+        {
+            title: "인물",
+            ids: ["leeyongho", "parkyeon", "kimseonghun", "jessica", "hanjeongyeon", "janghyeonho", "lukedyer", "ryurakwon", "namgung", "bridget", "pia", "elena", "sinabro", "swindler", "isabella", "yurahee", "observer"]
+        },
+        {
+            title: "재앙",
+            ids: ["calamity"]
+        }
+    ];
+
     // 사이드바 렌더링
     const sidebarList = document.getElementById('sidebar-doc-list');
     let sidebarHtml = '';
@@ -136,7 +203,19 @@
     }
     sidebarList.innerHTML = sidebarHtml;
 
-    // 2. 전체 문서 목록을 메인 화면에 보여주는 함수
+    // 3. 토글 기능 함수 (접기/펼치기)
+    window.toggleCategory = function(headerElement) {
+        // 1. 헤더에 collapsed 클래스 토글 (화살표 회전용)
+        headerElement.classList.toggle('collapsed');
+        
+        // 2. 바로 다음 형제 요소(ul) 찾아서 hidden 클래스 토글
+        const listElement = headerElement.nextElementSibling;
+        if (listElement && listElement.classList.contains('category-list')) {
+            listElement.classList.toggle('hidden');
+        }
+    }
+
+    // 4. 전체 문서 목록을 메인 화면에 분류하여 보여주는 함수
     window.showAllPages = function() {
         const displayArea = document.getElementById('wiki-display-area');
         
@@ -144,21 +223,32 @@
             <div class="title-area">
                 <h1>전체 문서 목록</h1>
             </div>
-            <p>이 위키에 등록된 모든 문서의 목록입니다.</p>
-            <ul class="doc-index-list">
+            <p>이 위키에 등록된 문서들을 분류별로 정리한 목록입니다. <br>제목을 클릭하면 목록을 펼치거나 접을 수 있습니다.</p>
         `;
 
-        // pageList를 순회하며 목록 생성
-        for (const [id, title] of Object.entries(pageList)) {
-            listHtml += `<li><a onclick="changePage('${id}')">${title}</a></li>`;
-        }
+        // 카테고리별로 순회하며 목록 생성
+        docCategories.forEach(category => {
+            // [수정] 헤더에 기본적으로 'collapsed' 클래스 추가 (화살표 오른쪽)
+            listHtml += `<h2 class="category-header collapsed" onclick="toggleCategory(this)">${category.title}</h2>`;
+            
+            // [수정] 리스트에 기본적으로 'hidden' 클래스 추가 (숨김 상태)
+            listHtml += `<ul class="doc-index-list category-list hidden">`;
+            
+            category.ids.forEach(id => {
+                const title = pageList[id];
+                if (title) { // 존재하는 문서만 표시
+                    listHtml += `<li><a onclick="changePage('${id}')">${title}</a></li>`;
+                }
+            });
+
+            listHtml += `</ul>`;
+        });
         
-        listHtml += `</ul>`;
         displayArea.innerHTML = listHtml;
         window.scrollTo(0, 0);
     }
 
-    // 3. 페이지 변경 함수 (개별 문서 로드)
+    // 5. 페이지 변경 함수
     window.changePage = async function(pageId) {
         const displayArea = document.getElementById('wiki-display-area');
         
@@ -213,7 +303,7 @@
         }
     }
 
-    // 4. 초기 페이지 로드: 문서 목록을 보여주도록 변경
+    // 6. 초기 로드
     window.onload = () => showAllPages();
 </script>
 </body>
