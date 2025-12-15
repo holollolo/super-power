@@ -15,7 +15,11 @@
         .container { display: flex; max-width: 1100px; margin: 0 auto; background: white; min-height: 100vh; border-left: 1px solid #ddd; border-right: 1px solid #ddd; align-items: stretch; }
         .main-content { flex: 1; padding: 30px; max-width: 800px; }
         .sidebar { width: 220px; background-color: #f9f9f9; border-left: 1px solid #ddd; padding: 20px; flex-shrink: 0; }
-        .sidebar-title { font-weight: bold; color: #2e4e3f; border-bottom: 2px solid var(--namu-green); padding-bottom: 5px; margin-bottom: 10px; font-size: 1.1rem; }
+        
+        /* 사이드바 타이틀에 커서 포인터 추가 */
+        .sidebar-title { font-weight: bold; color: #2e4e3f; border-bottom: 2px solid var(--namu-green); padding-bottom: 5px; margin-bottom: 10px; font-size: 1.1rem; cursor: pointer; }
+        .sidebar-title:hover { opacity: 0.8; }
+
         .sidebar ul { list-style: none; padding: 0; margin: 0; }
         .sidebar li { margin-bottom: 8px; font-size: 0.95rem; }
         .sidebar li a { display: block; padding: 5px; border-radius: 4px; transition: background 0.2s; }
@@ -46,6 +50,13 @@
         .profile-table th { background-color: #f9f9f9; width: 30%; padding: 7px; border-bottom: 1px solid #eee; border-right: 1px solid #eee; text-align: center; font-weight: bold; color: #333; vertical-align: middle; }
         .profile-table td { padding: 7px 10px; border-bottom: 1px solid #eee; text-align: left; color: #333; vertical-align: middle; }
         .profile-table tr:last-child th, .profile-table tr:last-child td { border-bottom: none; }
+        
+        /* 메인 화면 문서 목록 스타일 */
+        .doc-index-list { list-style: none; padding: 0; }
+        .doc-index-list li { margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+        .doc-index-list li a { font-size: 1.2rem; font-weight: bold; display: block; }
+        .doc-index-list li a:hover { color: #0056b3; }
+
         @media (max-width: 768px) {
             .container { flex-direction: column; }
             .sidebar { width: 100%; border-left: none; border-top: 1px solid #ddd; box-sizing: border-box; }
@@ -68,14 +79,14 @@
     </div>
 
     <div class="sidebar">
-        <div class="sidebar-title">전체 문서 목록</div>
+        <!-- 클릭 시 전체 문서 목록으로 돌아가도록 onclick 추가 -->
+        <div class="sidebar-title" onclick="showAllPages()">전체 문서 목록</div>
         <ul id="sidebar-doc-list"></ul>
     </div>
 </div>
 
 <script type="module">
-    // 1. 사이드바 목록 설정 (문서 ID: 제목)
-    // 새로운 문서를 만들면 여기에 한 줄씩 추가하세요.
+    // 1. 문서 목록 데이터
     const pageList = {
         "superpower": "초능력",
         "city": "초능력 연구 도시",
@@ -125,16 +136,39 @@
     }
     sidebarList.innerHTML = sidebarHtml;
 
-    // 페이지 변경 함수 (Global window 객체에 등록)
+    // 2. 전체 문서 목록을 메인 화면에 보여주는 함수
+    window.showAllPages = function() {
+        const displayArea = document.getElementById('wiki-display-area');
+        
+        let listHtml = `
+            <div class="title-area">
+                <h1>전체 문서 목록</h1>
+            </div>
+            <p>이 위키에 등록된 모든 문서의 목록입니다.</p>
+            <ul class="doc-index-list">
+        `;
+
+        // pageList를 순회하며 목록 생성
+        for (const [id, title] of Object.entries(pageList)) {
+            listHtml += `<li><a onclick="changePage('${id}')">${title}</a></li>`;
+        }
+        
+        listHtml += `</ul>`;
+        displayArea.innerHTML = listHtml;
+        window.scrollTo(0, 0);
+    }
+
+    // 3. 페이지 변경 함수 (개별 문서 로드)
     window.changePage = async function(pageId) {
         const displayArea = document.getElementById('wiki-display-area');
         
+        // 로딩 표시
+        displayArea.innerHTML = '<p>문서를 불러오는 중입니다...</p>';
+
         try {
-            // contents 폴더에서 해당 ID의 JS 파일을 동적으로 불러옵니다.
             const module = await import(`./contents/${pageId}.js`);
             const data = module.default;
 
-            // 프로필 박스 생성 로직
             let profileHtml = '';
             if (data.profile) {
                 const pName = data.profile.name || data.title;
@@ -155,7 +189,6 @@
                 profileHtml = `<div class="profile-box"><img src="${data.image}" alt="${data.title}"><div class="profile-caption">${data.title}</div></div>`;
             }
 
-            // HTML 조립
             displayArea.innerHTML = `
                 <div class="category">${data.category}</div>
                 <div class="title-area">
@@ -180,8 +213,8 @@
         }
     }
 
-    // 초기 페이지 로드
-    window.onload = () => changePage('superpower');
+    // 4. 초기 페이지 로드: 문서 목록을 보여주도록 변경
+    window.onload = () => showAllPages();
 </script>
 </body>
 </html>
