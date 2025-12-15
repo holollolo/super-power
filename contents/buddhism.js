@@ -1,5 +1,4 @@
 export default {
-        "buddhism": {
             title: "정행종(正行宗)",
             category: "분류: 종교, 불교",
             lastMod: "2019-05-12 10:00:00",
