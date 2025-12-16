@@ -1,5 +1,3 @@
---- START OF FILE fusion.js ---
-
 export default {
             title: "융합의 재앙",
             category: "분류: 재앙, 괴수, 실패작",
