@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>초능력 연구 도시 위키</title>
     <style>
-        /* 기본 스타일 유지 */
+        /* 기본 스타일 */
         html { scroll-behavior: smooth; }
         :root { --namu-green: #00A495; --link-color: #0275d8; --bg-gray: #f0f0f0; --border-color: #ccc; }
         body { font-family: 'Malgun Gothic', 'Noto Sans KR', sans-serif; margin: 0; padding: 0; background-color: var(--bg-gray); color: #373a3c; line-height: 1.6; }
@@ -24,9 +24,6 @@
         .sidebar li a { display: block; padding: 5px; border-radius: 4px; transition: background 0.2s; }
         .sidebar li a:hover { background-color: #e9ecef; text-decoration: none; }
         #sidebar-doc-list { max-height: 70vh; overflow-y: auto; padding-right: 10px; margin-top: 5px; padding-top: 5px; }
-        #sidebar-doc-list::-webkit-scrollbar { width: 6px; }
-        #sidebar-doc-list::-webkit-scrollbar-thumb { background-color: #ccc; border-radius: 4px; }
-        #sidebar-doc-list::-webkit-scrollbar-track { background-color: transparent; }
         
         /* 위키 본문 스타일 */
         .title-area { border-bottom: 2px solid gray; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: flex-end; }
@@ -35,369 +32,147 @@
         .toc { display: inline-block; background-color: #f9f9f9; border: 1px solid #ccc; padding: 10px 20px; margin: 10px 0; min-width: 200px; }
         .toc-title { text-align: center; font-weight: bold; margin-bottom: 5px; }
         .toc ul { list-style: none; padding-left: 10px; margin: 0; }
-        .toc li { font-size: 0.9rem; margin-bottom: 3px; }
         h2 { border-bottom: 1px solid var(--border-color); padding-bottom: 5px; margin-top: 30px; font-size: 1.5rem; color: #333; scroll-margin-top: 20px; }
         .wiki-table { border-collapse: collapse; width: 100%; margin: 10px 0; border: 1px solid #ccc; }
         .wiki-table td, .wiki-table th { border: 1px solid #ccc; padding: 8px; }
         .wiki-table th { background-color: var(--namu-green); color: white; text-align: center; }
-        .footnote { vertical-align: super; font-size: 0.7em; color: var(--namu-green); cursor: pointer; }
         .category { border: 1px solid #ccc; padding: 5px; border-radius: 5px; margin-bottom: 10px; font-size: 0.8rem; background: #fcfcfc; }
         .quote { margin: 10px 20px; padding: 10px; background: #f9f9f9; border-left: 4px solid var(--namu-green); }
+        
+        /* 프로필 박스 및 이미지 설정 */
         .profile-box { float: right; width: 300px; margin: 0 0 20px 20px; border: 1px solid var(--border-color); background: #fff; box-shadow: 2px 2px 5px rgba(0,0,0,0.1); font-size: 0.9rem; }
         .profile-header { background-color: var(--namu-green); color: white; font-weight: bold; text-align: center; padding: 8px 0; font-size: 1.1rem; border-bottom: 1px solid #ddd; }
-        .profile-image-area { width: 100%; background-color: #fff; text-align: center; border-bottom: 1px solid #eee; }
+        .profile-image-area { width: 100%; text-align: center; cursor: pointer; position: relative; }
         .profile-image-area img { width: 100%; height: auto; display: block; }
-        .profile-table { width: 100%; border-collapse: collapse; border-top: 1px solid var(--namu-green); }
-        .profile-table th { background-color: #f9f9f9; width: 30%; padding: 7px; border-bottom: 1px solid #eee; border-right: 1px solid #eee; text-align: center; font-weight: bold; color: #333; vertical-align: middle; }
-        .profile-table td { padding: 7px 10px; border-bottom: 1px solid #eee; text-align: left; color: #333; vertical-align: middle; }
-        .profile-table tr:last-child th, .profile-table tr:last-child td { border-bottom: none; }
-        
-        /* ---------------------------------------------------- */
-        /* 접기/펼치기 및 문서 목록 스타일 */
-        /* ---------------------------------------------------- */
-        .doc-index-list { list-style: none; padding: 0; margin-bottom: 20px; transition: all 0.3s; }
-        .doc-index-list li { margin-bottom: 5px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
-        .doc-index-list li a { font-size: 1.1rem; font-weight: bold; display: block; padding: 5px; }
-        .doc-index-list li a:hover { color: #0056b3; background-color: #f8f9fa; }
+        .profile-table { width: 100%; border-collapse: collapse; }
+        .profile-table th { background-color: #f9f9f9; width: 30%; padding: 7px; border-bottom: 1px solid #eee; border-right: 1px solid #eee; text-align: center; font-weight: bold; }
+        .profile-table td { padding: 7px 10px; border-bottom: 1px solid #eee; text-align: left; }
+        .profile-caption { text-align: center; padding: 5px; font-weight: bold; background: #f9f9f9; }
 
-        /* 카테고리 헤더 스타일 (클릭 가능) */
-        .category-header {
-            cursor: pointer;
-            user-select: none; /* 드래그 방지 */
-            display: flex;
-            align-items: center;
-            border-bottom: 2px solid #ccc;
-            padding-bottom: 5px;
-            margin-top: 30px;
-        }
-        .category-header:hover {
-            color: var(--namu-green);
-            border-color: var(--namu-green);
-        }
+        /* 스포일러 이미지 설정 */
+        .spoiler-container { position: relative; overflow: hidden; background-color: #000; cursor: pointer; }
+        .spoiler-image { filter: blur(30px); transition: filter 0.3s ease; }
+        .spoiler-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 0.9rem; background: rgba(0, 0, 0, 0.4); text-align: center; padding: 10px; box-sizing: border-box; z-index: 10; transition: opacity 0.3s; }
+        .revealed .spoiler-image { filter: blur(0); }
+        .revealed .spoiler-overlay { opacity: 0; pointer-events: none; }
 
-        /* 삼각형 아이콘 (CSS로 생성) */
-        .category-header::before {
-            content: '▶';
-            display: inline-block;
-            margin-right: 10px;
-            font-size: 0.8em;
-            color: #666;
-            transition: transform 0.2s ease;
-            transform: rotate(90deg); /* 기본: 아래쪽(펼침) */
-        }
-        
-        /* 접힌 상태의 삼각형 (오른쪽) */
-        .category-header.collapsed::before {
-            transform: rotate(0deg);
-        }
-
-        /* 목록 숨김 클래스 */
-        .category-list.hidden {
-            display: none;
-        }
+        /* 목록 스타일 */
+        .doc-index-list { list-style: none; padding: 0; }
+        .category-header { cursor: pointer; border-bottom: 2px solid #ccc; padding-bottom: 5px; margin-top: 30px; display: flex; align-items: center; }
+        .category-header::before { content: '▶'; display: inline-block; margin-right: 10px; font-size: 0.8em; transition: transform 0.2s; transform: rotate(90deg); }
+        .category-header.collapsed::before { transform: rotate(0deg); }
+        .category-list.hidden { display: none; }
 
         @media (max-width: 768px) {
             .container { flex-direction: column; }
-            .sidebar { width: 100%; border-left: none; border-top: 1px solid #ddd; box-sizing: border-box; }
-            #sidebar-doc-list { max-height: 300px; }
-            .main-content { padding: 15px; }
+            .sidebar { width: 100%; border-left: none; border-top: 1px solid #ddd; }
             .profile-box { float: none; width: 100%; margin: 0 0 20px 0; }
         }
-
-        /* 스포일러 이미지 컨테이너 */
-.spoiler-container {
-    position: relative;
-    cursor: pointer;
-    overflow: hidden;
-    background-color: #000;
-}
-
-/* 블러 처리된 이미지 */
-.spoiler-image {
-    filter: blur(30px); /* 흐림 정도 */
-    transition: filter 0.3s ease;
-}
-
-/* "클릭하여 확인" 안내 문구 */
-.spoiler-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-weight: bold;
-    font-size: 1.1rem;
-    background: rgba(0, 0, 0, 0.4); /* 배경 어둡게 */
-    transition: opacity 0.3s ease;
-    z-index: 10;
-}
-
-/* 클릭 후 해제된 상태 */
-.revealed .spoiler-image {
-    filter: blur(0);
-}
-.revealed .spoiler-overlay {
-    opacity: 0;
-    pointer-events: none;
-}
-        /* 1. 프로필 박스 내부 이미지 (기존 300px 제한 내에서 꽉 차게) */
-.profile-image-area img {
-    width: 100%;       /* 부모 요소(300px) 너비에 강제로 맞춤 */
-    height: auto;      /* 비율 유지 */
-    display: block;
-}
-
-/* 2. 본문 내용이나 스포일러 이미지 등 모든 이미지에 적용 (가장 중요) */
-/* 본문 영역(.main-content) 안에 있는 모든 이미지가 
-   본문 너비를 넘어가면 자동으로 축소되도록 설정 */
-.main-content img, .spoiler-image {
-    max-width: 100%;   /* 이미지가 부모 너비보다 크면 100%로 축소 */
-    height: auto;      /* 비율 유지 */
-    object-fit: contain; /* 이미지가 찌그러지지 않게 함 */
-}
     </style>
 </head>
 
 <body>
 <div class="navbar"></div>
-
 <div class="container">
     <div class="main-content">
         <div id="wiki-display-area">
-            <!-- 내용이 여기에 로드됩니다 -->
             <p>로딩 중...</p>
         </div>
     </div>
-
     <div class="sidebar">
-        <!-- 클릭 시 전체 문서 목록으로 돌아가도록 onclick 추가 -->
         <div class="sidebar-title" onclick="showAllPages()">전체 문서 목록</div>
         <ul id="sidebar-doc-list"></ul>
     </div>
 </div>
 
 <script type="module">
-    // 1. 문서 목록 데이터 (ID: 제목)
     const pageList = {
-        "superpower": "초능력",
-        "city": "초능력 연구 도시",
-        "korea": "한국",
-        "isolation": "초능력 격리",
-        "supertool": "초능도구",
-        "fullrecovery": "풀리커버리",
-        "dawnoffreedom": "자유의 여명",
-        "nebula": "성운교",
-        "rakwon": "락원농장",
-        "hanul": "한울방범대",
-        "pleasurecity": "유흥도시",
-        "yeollak": "열락(悅樂)",
-        "medicalcenter": "On the Mend Medical Center",
-        "kaguard": "KA Guard",
-        "purehuman": "순수인간연합",
-        "steelhyena": "강철 하이에나",
-        "predator": "프레데터",
-        "meari": "메아리",
-        "buddhism": "정행종(正行宗)",
-        "daejeong": "대정그룹",
-        "hanjeongyeon": "한정연",
-        "lukedyer": "루크 다이어",
-        "janghyeonho": "장현호",
-        "jessica": "제시카 미첼",
-        "kimseonghun": "김성훈",
-        "ryurakwon": "류락원",
-        "parkyeon": "박연",
-        "leeyongho": "이용호",
-        "namgung": "남궁철호",
-        "yurahee": "유라희",
-        "observer": "관측자",
-        "sinabro": "시나브로",
-        "bridget": "브리짓 갤러거",
-        "pia": "피아 슈탈",
-        "elena": "엘레나 비아넬로",
-        "swindler": "천면의 사기꾼",
-        "isabella": "이사벨라 로시",
-        "giant": "중압의 재앙",
-        "purify": "정화의 재앙",
-        "amalgamation":"융합의 재앙"
+        "superpower": "초능력", "city": "초능력 연구 도시", "korea": "한국", "isolation": "초능력 격리",
+        "supertool": "초능도구", "fullrecovery": "풀리커버리", "dawnoffreedom": "자유의 여명",
+        "nebula": "성운교", "rakwon": "락원농장", "hanul": "한울방범대", "pleasurecity": "유흥도시",
+        "yeollak": "열락(悅樂)", "medicalcenter": "On the Mend Medical Center", "kaguard": "KA Guard",
+        "purehuman": "순수인간연합", "steelhyena": "강철 하이에나", "predator": "프레데터", "meari": "메아리",
+        "buddhism": "정행종(正행宗)", "daejeong": "대정그룹", "hanjeongyeon": "한정연", "lukedyer": "루크 다이어",
+        "janghyeonho": "장현호", "jessica": "제시카 미첼", "kimseonghun": "김성훈", "ryurakwon": "류락원",
+        "parkyeon": "박연", "leeyongho": "이용호", "namgung": "남궁철호", "yurahee": "유라희", "observer": "관측자",
+        "sinabro": "시나브로", "bridget": "브리짓 갤러거", "pia": "피아 슈탈", "elena": "엘레나 비아넬로",
+        "swindler": "천면의 사기꾼", "isabella": "이사벨라 로시", "giant": "중압의 재앙", "purify": "정화의 재앙", "amalgamation":"융합의 재앙"
     };
 
-    // 2. 카테고리별 분류 정의 (ID 목록)
     const docCategories = [
-        {
-            title: "초능력 및 설정",
-            ids: ["superpower", "supertool"]
-        },
-        {
-            title: "정치, 국가 및 지명",
-            ids: ["korea", "city", "isolation", "pleasurecity"]
-        },
-        {
-            title: "기업",
-            ids: ["daejeong", "fullrecovery", "rakwon", "medicalcenter", "kaguard"]
-        },
-        {
-            title: "집단 및 조직",
-            ids: ["hanul", "nebula", "purehuman", "dawnoffreedom", "yeollak", "predator", "steelhyena", "meari", "buddhism"]
-        },
-        {
-            title: "인물",
-            ids: ["leeyongho", "parkyeon", "kimseonghun", "jessica", "hanjeongyeon", "janghyeonho", "lukedyer", "ryurakwon", "namgung", "bridget", "pia", "elena", "sinabro", "swindler", "isabella", "yurahee", "observer"]
-        },
-        {
-            title: "재앙",
-            ids: ["giant","purify","amalgamation"]
-        }
+        { title: "초능력 및 설정", ids: ["superpower", "supertool"] },
+        { title: "정치, 국가 및 지명", ids: ["korea", "city", "isolation", "pleasurecity"] },
+        { title: "기업", ids: ["daejeong", "fullrecovery", "rakwon", "medicalcenter", "kaguard"] },
+        { title: "집단 및 조직", ids: ["hanul", "nebula", "purehuman", "dawnoffreedom", "yeollak", "predator", "steelhyena", "meari", "buddhism"] },
+        { title: "인물", ids: ["leeyongho", "parkyeon", "kimseonghun", "jessica", "hanjeongyeon", "janghyeonho", "lukedyer", "ryurakwon", "namgung", "bridget", "pia", "elena", "sinabro", "swindler", "isabella", "yurahee", "observer"] },
+        { title: "재앙", ids: ["giant","purify","amalgamation"] }
     ];
 
-    // 사이드바 렌더링
     const sidebarList = document.getElementById('sidebar-doc-list');
-    let sidebarHtml = '';
-    for (const [id, title] of Object.entries(pageList)) {
-        sidebarHtml += `<li><a onclick="changePage('${id}')">${title}</a></li>`;
-    }
-    sidebarList.innerHTML = sidebarHtml;
+    sidebarList.innerHTML = Object.entries(pageList).map(([id, title]) => `<li><a onclick="changePage('${id}')">${title}</a></li>`).join('');
 
-    // 3. 토글 기능 함수 (접기/펼치기)
-    window.toggleCategory = function(headerElement) {
-        // 1. 헤더에 collapsed 클래스 토글 (화살표 회전용)
-        headerElement.classList.toggle('collapsed');
-        
-        // 2. 바로 다음 형제 요소(ul) 찾아서 hidden 클래스 토글
-        const listElement = headerElement.nextElementSibling;
-        if (listElement && listElement.classList.contains('category-list')) {
-            listElement.classList.toggle('hidden');
-        }
-    }
+    window.toggleCategory = (header) => {
+        header.classList.toggle('collapsed');
+        header.nextElementSibling.classList.toggle('hidden');
+    };
 
-    // 4. 전체 문서 목록을 메인 화면에 분류하여 보여주는 함수
-    window.showAllPages = function() {
+    window.showAllPages = () => {
         const displayArea = document.getElementById('wiki-display-area');
-        
-        let listHtml = `
-            <div class="title-area">
-                <h1>전체 문서 목록</h1>
-            </div>
-            <p>이 위키에 등록된 문서들을 분류별로 정리한 목록입니다. <br>제목을 클릭하면 목록을 펼치거나 접을 수 있습니다.</p>
-        `;
-
-        // 카테고리별로 순회하며 목록 생성
-        docCategories.forEach(category => {
-            // [수정] 헤더에 기본적으로 'collapsed' 클래스 추가 (화살표 오른쪽)
-            listHtml += `<h2 class="category-header collapsed" onclick="toggleCategory(this)">${category.title}</h2>`;
-            
-            // [수정] 리스트에 기본적으로 'hidden' 클래스 추가 (숨김 상태)
-            listHtml += `<ul class="doc-index-list category-list hidden">`;
-            
-            category.ids.forEach(id => {
-                const title = pageList[id];
-                if (title) { // 존재하는 문서만 표시
-                    listHtml += `<li><a onclick="changePage('${id}')">${title}</a></li>`;
-                }
-            });
-
-            listHtml += `</ul>`;
+        let html = `<div class="title-area"><h1>전체 문서 목록</h1></div><p>문서 제목을 클릭하면 목록을 볼 수 있습니다.</p>`;
+        docCategories.forEach(cat => {
+            html += `<h2 class="category-header collapsed" onclick="toggleCategory(this)">${cat.title}</h2>`;
+            html += `<ul class="doc-index-list category-list hidden">` + cat.ids.map(id => `<li><a onclick="changePage('${id}')">${pageList[id]}</a></li>`).join('') + `</ul>`;
         });
-        
-        displayArea.innerHTML = listHtml;
+        displayArea.innerHTML = html;
         window.scrollTo(0, 0);
-    }
+    };
 
-// 5. 페이지 변경 함수 (수정본)
-    window.changePage = async function(pageId) {
+    window.changePage = async (pageId) => {
         const displayArea = document.getElementById('wiki-display-area');
-        
-        // 로딩 표시
         displayArea.innerHTML = '<p>문서를 불러오는 중입니다...</p>';
-
         try {
             const module = await import(`./contents/${pageId}.js`);
             const data = module.default;
-
             let profileHtml = '';
+
+            const makeImageHtml = (imgUrl, title, isSpoiler) => {
+                if (!imgUrl) return '';
+                if (isSpoiler) {
+                    return `
+                        <div class="spoiler-container" onclick="if(this.classList.contains('revealed')){ window.open('${imgUrl}', '_blank'); } else { this.classList.add('revealed'); }">
+                            <div class="spoiler-overlay">!! 주의 !!<br>클릭하여 확인<br>(한 번 더 클릭 시 새 탭에서 열기)</div>
+                            <img src="${imgUrl}" alt="${title}" class="spoiler-image">
+                        </div>`;
+                }
+                return `<img src="${imgUrl}" alt="${title}" style="cursor: pointer;" onclick="window.open('${imgUrl}', '_blank')">`;
+            };
+
             if (data.profile) {
                 const pName = data.profile.name || data.title;
-                let imageHtml = '';
-
-                // 이미지 출력 로직 수정: isSpoiler가 true일 때만 클릭 확인 기능 적용
-                if (data.profile.image) {
-    if (data.profile.isSpoiler === true) {
-        // 스포일러 이미지인 경우: 클릭 시 reveal 클래스를 추가하고, 이미지는 링크로 감쌈
-        imageHtml = `
-            <div class="spoiler-container" onclick="this.classList.add('revealed')">
-                <div class="spoiler-overlay">!!혐오/공포/고어 주의!! 클릭하여 확인</div>
-                <a href="${data.profile.image}" target="_blank" onclick="event.stopPropagation ? event.stopPropagation() : (window.event.cancelBubble = true); if(!this.parentElement.classList.contains('revealed')) return false;">
-                    <img src="${data.profile.image}" alt="${pName}" class="spoiler-image">
-                </a>
-            </div>`;
-    } else {
-        // 일반 이미지인 경우: 새 탭 링크로 감쌈
-        imageHtml = `<a href="${data.profile.image}" target="_blank"><img src="${data.profile.image}" alt="${pName}"></a>`;
-    }
-}
-
-                let tableRows = '';
-                if (data.profile.birth) tableRows += `<tr><th>출생</th><td>${data.profile.birth}</td></tr>`;
-                if (data.profile.residence) tableRows += `<tr><th>거주지</th><td>${data.profile.residence}</td></tr>`;
-                if (data.profile.nationality) tableRows += `<tr><th>국적</th><td>${data.profile.nationality}</td></tr>`;
-                if (data.profile.job) tableRows += `<tr><th>직업</th><td>${data.profile.job}</td></tr>`;
-
-                profileHtml = `
-                    <div class="profile-box">
-                        <div class="profile-header">${pName}</div>
-                        <div class="profile-image-area">${imageHtml}</div>
-                        <table class="profile-table">${tableRows}</table>
-                    </div>`;
-            } } else if (data.image) {
-    // profile 없이 image만 있을 때 (재앙 문서 등)
-    let imageContent = '';
-    
-    if (data.isSpoiler === true) {
-        imageContent = `
-            <div class="spoiler-container" onclick="this.classList.add('revealed')">
-                <div class="spoiler-overlay">혐오/공포/고어 주의!! 클릭하여 확인</div>
-                <a href="${data.image}" target="_blank" onclick="event.stopPropagation ? event.stopPropagation() : (window.event.cancelBubble = true); if(!this.parentElement.classList.contains('revealed')) return false;">
-                    <img src="${data.image}" alt="${data.title}" class="spoiler-image">
-                </a>
-            </div>`;
-    } else {
-        imageContent = `<a href="${data.image}" target="_blank"><img src="${data.image}" alt="${data.title}"></a>`;
-    }
-
-    profileHtml = `
-        <div class="profile-box">
-            ${imageContent}
-            <div class="profile-caption">${data.title}</div>
-        </div>`;
-}
+                const imgContent = makeImageHtml(data.profile.image, pName, data.profile.isSpoiler);
+                let rows = '';
+                if (data.profile.birth) rows += `<tr><th>출생</th><td>${data.profile.birth}</td></tr>`;
+                if (data.profile.residence) rows += `<tr><th>거주지</th><td>${data.profile.residence}</td></tr>`;
+                if (data.profile.nationality) rows += `<tr><th>국적</th><td>${data.profile.nationality}</td></tr>`;
+                if (data.profile.job) rows += `<tr><th>직업</th><td>${data.profile.job}</td></tr>`;
+                profileHtml = `<div class="profile-box"><div class="profile-header">${pName}</div><div class="profile-image-area">${imgContent}</div><table class="profile-table">${rows}</table></div>`;
+            } else if (data.image) {
+                const imgContent = makeImageHtml(data.image, data.title, data.isSpoiler);
+                profileHtml = `<div class="profile-box">${imgContent}<div class="profile-caption">${data.title}</div></div>`;
+            }
 
             displayArea.innerHTML = `
                 <div class="category">${data.category}</div>
-                <div class="title-area">
-                    <h1>${data.title}</h1>
-                    <div class="action-buttons">
-                        <button>편집</button> <button>토론</button> <button>역사</button>
-                    </div>
-                </div>
-                <div style="text-align: right; font-size: 0.8rem; color: gray; margin-bottom: 10px;">
-                    최근 수정 시각: ${data.lastMod}
-                </div>
-                <div>
-                    ${profileHtml}
-                    ${data.content}
-                </div>
-            `;
+                <div class="title-area"><h1>${data.title}</h1><div class="action-buttons"><button>편집</button> <button>토론</button> <button>역사</button></div></div>
+                <div style="text-align: right; font-size: 0.8rem; color: gray; margin-bottom: 10px;">최근 수정 시각: ${data.lastMod}</div>
+                <div>${profileHtml}${data.content}</div>`;
             window.scrollTo(0, 0);
-
-        } catch (error) {
-            console.error(error);
-            displayArea.innerHTML = `<h2>문서를 불러올 수 없습니다.</h2><p>파일 경로(contents/${pageId}.js)를 확인하세요.</p>`;
+        } catch (e) {
+            console.error(e);
+            displayArea.innerHTML = `<h2>오류</h2><p>문서를 불러올 수 없습니다. 서버 환경(Live Server 등)에서 실행 중인지 확인하세요.</p>`;
         }
-    }
-    // 6. 초기 로드
+    };
+
     window.onload = () => showAllPages();
 </script>
 </body>
