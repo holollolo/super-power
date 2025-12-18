@@ -1,6 +1,6 @@
 export default {
             title: "정화의 재앙",
-            category: "분류: 재앙, 괴수, 도시전설",
+            category: "분류: 재앙, 괴수",
             lastMod: "2019-11-11 05:55:00",
             image:"https://itimg.kr/2574/괴수/정화의재앙.webp",
             isSpoiler: true,
