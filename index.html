@@ -144,6 +144,21 @@
     opacity: 0;
     pointer-events: none;
 }
+        /* 1. 프로필 박스 내부 이미지 (기존 300px 제한 내에서 꽉 차게) */
+.profile-image-area img {
+    width: 100%;       /* 부모 요소(300px) 너비에 강제로 맞춤 */
+    height: auto;      /* 비율 유지 */
+    display: block;
+}
+
+/* 2. 본문 내용이나 스포일러 이미지 등 모든 이미지에 적용 (가장 중요) */
+/* 본문 영역(.main-content) 안에 있는 모든 이미지가 
+   본문 너비를 넘어가면 자동으로 축소되도록 설정 */
+.main-content img, .spoiler-image {
+    max-width: 100%;   /* 이미지가 부모 너비보다 크면 100%로 축소 */
+    height: auto;      /* 비율 유지 */
+    object-fit: contain; /* 이미지가 찌그러지지 않게 함 */
+}
     </style>
 </head>
 
