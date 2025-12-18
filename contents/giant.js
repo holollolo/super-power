@@ -1,7 +1,9 @@
 export default {
             title: "중압의 재앙",
-            category: "분류: 재앙, 괴수, 도시전설",
+            category: "분류: 재앙, 괴수",
             lastMod: "2019-11-11 04:44:00",
+            image:"https://itimg.kr/2574/괴수/중압의재앙.webp",
+            isSpoiler: true,
             content: `
         <div class="toc">
             <div class="toc-title">목차</div>
@@ -31,3 +33,4 @@ export default {
             `
 
 };
+
