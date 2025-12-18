@@ -333,8 +333,27 @@
                         <table class="profile-table">${tableRows}</table>
                     </div>`;
             } else if (data.image) {
-                profileHtml = `<div class="profile-box"><img src="${data.image}" alt="${data.title}"><div class="profile-caption">${data.title}</div></div>`;
-            }
+    // [수정] profile 없이 image만 있을 때의 처리
+    let imageContent = '';
+    
+    if (data.isSpoiler === true) {
+        // 스포일러가 설정된 경우
+        imageContent = `
+            <div class="spoiler-container" onclick="this.classList.add('revealed')">
+                <div class="spoiler-overlay">클릭하여 확인</div>
+                <img src="${data.image}" alt="${data.title}" class="spoiler-image">
+            </div>`;
+    } else {
+        // 일반 이미지인 경우
+        imageContent = `<img src="${data.image}" alt="${data.title}">`;
+    }
+
+    profileHtml = `
+        <div class="profile-box">
+            ${imageContent}
+            <div class="profile-caption">${data.title}</div>
+        </div>`;
+}
 
             displayArea.innerHTML = `
                 <div class="category">${data.category}</div>
