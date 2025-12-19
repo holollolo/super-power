@@ -111,7 +111,7 @@
         { title: "재앙", ids: ["giant","purify","amalgamation"] }
     ];
 
-const sidebarList = document.getElementById('sidebar-doc-list');
+    const sidebarList = document.getElementById('sidebar-doc-list');
     sidebarList.innerHTML = Object.entries(pageList).map(([id, title]) => `<li><a onclick="changePage('${id}')">${title}</a></li>`).join('');
 
     window.toggleCategory = (header) => {
@@ -119,22 +119,50 @@ const sidebarList = document.getElementById('sidebar-doc-list');
         header.nextElementSibling.classList.toggle('hidden');
     };
 
-    // [수정됨] 뒤로 가기 이벤트 감지
-    window.addEventListener('popstate', (event) => {
-        if (event.state && event.state.pageId) {
-            // 히스토리 상태가 있으면 해당 페이지 로드 (히스토리 추가 안 함)
-            changePage(event.state.pageId, false);
-        } else {
-            // 상태가 없으면 메인 목록으로 (히스토리 추가 안 함)
-            showAllPages(false);
+    // [수정됨] 내부 앵커 클릭 시 리셋 방지 처리
+    document.addEventListener('click', function(event) {
+        // a 태그인지 확인
+        const anchor = event.target.closest('a');
+        if (!anchor) return;
+
+        const href = anchor.getAttribute('href');
+        // href가 #으로 시작하는지 확인 (예: #s-1, #fn-1)
+        if (href && href.startsWith('#')) {
+            const id = href.substring(1); // # 제거한 id 값
+            
+            // 만약 pageList에 있는 문서 ID라면 (예: #observer) 기존대로 동작하도록 둠
+            if (pageList[id]) {
+                return; 
+            }
+
+            // pageList에 없는 ID라면 (즉, 목차나 주석 등 내부 링크라면)
+            const element = document.getElementById(id);
+            if (element) {
+                event.preventDefault(); // URL 변경(해시 변경)을 막음 -> 초기화 방지
+                element.scrollIntoView({ behavior: 'smooth' }); // 부드럽게 스크롤 이동
+            }
         }
     });
 
-    // [수정됨] 메인 목록 보여주기 (addToHistory 파라미터 추가)
+    // 뒤로 가기 이벤트 감지
+    window.addEventListener('popstate', (event) => {
+        if (event.state && event.state.pageId) {
+            changePage(event.state.pageId, false);
+        } else {
+            // 히스토리 상태가 없으면 메인으로 가되, 혹시 해시가 유효한 페이지라면 그 페이지를 유지하도록 보완
+            const hash = location.hash.replace('#', '');
+            if (hash && pageList[hash]) {
+                changePage(hash, false);
+            } else {
+                showAllPages(false);
+            }
+        }
+    });
+
+    // 메인 목록 보여주기
     window.showAllPages = (addToHistory = true) => {
-        // 히스토리에 기록할지 여부 확인
         if (addToHistory) {
-            history.pushState(null, null, location.pathname); // URL에서 해시(#) 제거
+            history.pushState(null, null, location.pathname); 
         }
 
         const displayArea = document.getElementById('wiki-display-area');
@@ -147,9 +175,8 @@ const sidebarList = document.getElementById('sidebar-doc-list');
         window.scrollTo(0, 0);
     };
 
-    // [수정됨] 페이지 변경 함수 (addToHistory 파라미터 추가)
+    // 페이지 변경 함수
     window.changePage = async (pageId, addToHistory = true) => {
-        // 히스토리에 기록할지 여부 확인 (뒤로 가기로 왔을 때는 기록하지 않음)
         if (addToHistory) {
             history.pushState({ pageId: pageId }, null, `#${pageId}`);
         }
@@ -199,14 +226,12 @@ const sidebarList = document.getElementById('sidebar-doc-list');
         }
     };
 
-    // [수정됨] 초기 로드 시 URL 해시 확인
+    // 초기 로드 시 URL 해시 확인
     window.onload = () => {
         const hash = location.hash.replace('#', '');
         if (hash && pageList[hash]) {
-            // URL에 해시(예: #lukedyer)가 있으면 그 페이지 로드 (히스토리 추가 안 함)
             changePage(hash, false);
         } else {
-            // 없으면 전체 목록 로드
             showAllPages(false);
         }
     };
