@@ -1,7 +1,7 @@
 export default {
     title: "NON - RP",
     category: "NON - RP",
-    lastMod: "2025-12-24 17:30:00",
+    lastMod: "2025-12-24 18:00:00",
     content: `
     <h2 id="s-1">1. 캐릭터 목록</h2>
     <p>이미지를 클릭하면 새 탭에서 원본을 확인할 수 있습니다.</p>
@@ -223,101 +223,96 @@ export default {
             <img src="https://itimg.kr/2574/1/profile/53.webp" class="char-img" onclick="window.open(this.src)">
             <div class="char-name">미네</div>
         </div>
-        <h2 id="s-2">2. 이미지 링크<br></h2>
-    <p>형식: ![](https://itimg.kr/2574/0/(캐릭터코드)/(상황코드).webp)<br>
-    [캐릭터 코드]<br>
-캐릭터 이름|캐릭터 코드<br>
-황리|0<br>
-김서아|1<br>
-최설연|2<br>
-바딤 볼코프|3<br>
-한정연|4<br>
-라니아 사미르 다르위시|5<br>
-시노노메 시즈쿠|6<br>
-강채아|7<br>
-루크 다이어|8<br>
-류락원|9<br>
-연 정|10<br>
-베아트릭스 코스타 산투스|11<br>
-유라희|12<br>
-니야리 아자미|13<br>
-구르딥 싱 그레왈|14<br>
-정아연|15<br>
-배용현|16<br>
-김성훈|17<br>
-데릭 로저스|18<br>
-강하영|19<br>
-카토 아야|20<br>
-박현서|21<br>
-샤데이 발로군|22<br>
-데이지 베넷|23<br>
-유민아|24<br>
-신연|25<br>
-미나토 렌|26<br>
-장현호|27<br>
-이사벨라 로시|28<br>
-카르멘 델가도|29<br>
-이석|30<br>
-제시카 미첼|31<br>
-수황|32<br>
-한 케츠잔|33<br>
-관측자|34<br>
-천설호|35<br>
-박연|36<br>
-법오|37<br>
-귀불|38<br>
-행법|39<br>
-시나브로|40<br>
-레오폴드 슈밋|41<br>
-엘레나 비아넬로|42<br>
-이리나 소콜로바|43<br>
-레 티 린|44<br>
-남궁철호|45<br>
-한다솜|46<br>
-이용호|47<br>
-이세은|48<br>
-강아경|49<br>
-브리짓 갤러거|50<br>
-피아 슈탈|51<br>
-에바|52<br>
-미네|53<br><br>
-[상황코드]<br>
-상황 이름|상황 코드<br>
-- 일상<br>
-무표정|0<br>
-미소|1<br>
-짜증|2<br>
-분노|3<br>
-후회|4<br>
-경멸|5<br>
-혐오|6<br>
-증오|7<br>
-슬픔|8<br>
-놀람|9<br>
-의문|10<br>
-피곤함|11<br>
-당황|12<br>
-부끄러움|13<br>
-공포|14<br>
-자신감|15<br>
-질투|16<br>
-불안|17<br>
-- NSFW<br>
-정상위|A<br>
-정상위 사정중|B<br>
-기승위|C<br>
-기승위 사정중|D<br>
-후배위|E<br>
-후배위 사정중|F<br>
-파이즈리|G<br>
-파이즈리 사정중|H<br>
-펠라치오|I<br>
-펠라치오 딥쓰롯|J<br>
-펠라치오 사정중|K<br>
-정액있는 입 보여주기|L<br>
-정액 삼키기|M<br>
-정액 삼킨 후 보여주기|O<br>
-    </p>
+    </div>
+
+    <h2 id="s-2">2. 이미지 코드표</h2>
+    <p>원하는 캐릭터와 표정 코드를 조합하여 URL을 완성하세요.</p>
+    <div class="quote">
+        <b>이미지 URL 형식:</b><br>
+        <code>https://itimg.kr/2574/0/<span style="color:#e91e63"><b>[캐릭터코드]</b></span>/<span style="color:#2196f3"><b>[상황코드]</b></span>.webp</code>
+    </div>
+
+    <h3>2.1. 캐릭터 코드</h3>
+    <table class="wiki-table" style="font-size: 0.9em; text-align: center;">
+        <tr>
+            <th width="15%">코드</th><th width="35%">이름</th>
+            <th width="15%">코드</th><th width="35%">이름</th>
+        </tr>
+        <tr><td>0</td><td>황리</td><td>27</td><td>장현호</td></tr>
+        <tr><td>1</td><td>김서아</td><td>28</td><td>이사벨라 로시</td></tr>
+        <tr><td>2</td><td>최설연</td><td>29</td><td>카르멘 델가도</td></tr>
+        <tr><td>3</td><td>바딤 볼코프</td><td>30</td><td>이석</td></tr>
+        <tr><td>4</td><td>한정연</td><td>31</td><td>제시카 미첼</td></tr>
+        <tr><td>5</td><td>라니아 사미르 다르위시</td><td>32</td><td>수황</td></tr>
+        <tr><td>6</td><td>시노노메 시즈쿠</td><td>33</td><td>한 케츠잔</td></tr>
+        <tr><td>7</td><td>강채아</td><td>34</td><td>관측자</td></tr>
+        <tr><td>8</td><td>루크 다이어</td><td>35</td><td>천설호</td></tr>
+        <tr><td>9</td><td>류락원</td><td>36</td><td>박연</td></tr>
+        <tr><td>10</td><td>연 정</td><td>37</td><td>법오</td></tr>
+        <tr><td>11</td><td>베아트릭스</td><td>38</td><td>귀불</td></tr>
+        <tr><td>12</td><td>유라희</td><td>39</td><td>행법</td></tr>
+        <tr><td>13</td><td>니야리 아자미</td><td>40</td><td>시나브로</td></tr>
+        <tr><td>14</td><td>구르딥 싱 그레왈</td><td>41</td><td>레오폴드 슈밋</td></tr>
+        <tr><td>15</td><td>정아연</td><td>42</td><td>엘레나 비아넬로</td></tr>
+        <tr><td>16</td><td>배용현</td><td>43</td><td>이리나 소콜로바</td></tr>
+        <tr><td>17</td><td>김성훈</td><td>44</td><td>레 티 린</td></tr>
+        <tr><td>18</td><td>데릭 로저스</td><td>45</td><td>남궁철호</td></tr>
+        <tr><td>19</td><td>강하영</td><td>46</td><td>한다솜</td></tr>
+        <tr><td>20</td><td>카토 아야</td><td>47</td><td>이용호</td></tr>
+        <tr><td>21</td><td>박현서</td><td>48</td><td>이세은</td></tr>
+        <tr><td>22</td><td>샤데이 발로군</td><td>49</td><td>강아경</td></tr>
+        <tr><td>23</td><td>데이지 베넷</td><td>50</td><td>브리짓 갤러거</td></tr>
+        <tr><td>24</td><td>유민아</td><td>51</td><td>피아 슈탈</td></tr>
+        <tr><td>25</td><td>신연</td><td>52</td><td>에바</td></tr>
+        <tr><td>26</td><td>미나토 렌</td><td>53</td><td>미네</td></tr>
+    </table>
+
+    <h3>2.2. 상황 코드</h3>
+    <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+        <div style="flex: 1; min-width: 250px;">
+            <h4 style="border-bottom: 2px solid #4CAF50; padding-bottom: 5px; color: #4CAF50;">일상 / 표정</h4>
+            <table class="wiki-table" style="width: 100%; font-size: 0.9em; text-align: center;">
+                <tr><th width="30%">코드</th><th>상황</th></tr>
+                <tr><td>0</td><td>무표정</td></tr>
+                <tr><td>1</td><td>미소</td></tr>
+                <tr><td>2</td><td>짜증</td></tr>
+                <tr><td>3</td><td>분노</td></tr>
+                <tr><td>4</td><td>후회</td></tr>
+                <tr><td>5</td><td>경멸</td></tr>
+                <tr><td>6</td><td>혐오</td></tr>
+                <tr><td>7</td><td>증오</td></tr>
+                <tr><td>8</td><td>슬픔</td></tr>
+                <tr><td>9</td><td>놀람</td></tr>
+                <tr><td>10</td><td>의문</td></tr>
+                <tr><td>11</td><td>피곤함</td></tr>
+                <tr><td>12</td><td>당황</td></tr>
+                <tr><td>13</td><td>부끄러움</td></tr>
+                <tr><td>14</td><td>공포</td></tr>
+                <tr><td>15</td><td>자신감</td></tr>
+                <tr><td>16</td><td>질투</td></tr>
+                <tr><td>17</td><td>불안</td></tr>
+            </table>
+        </div>
+        <div style="flex: 1; min-width: 250px;">
+            <h4 style="border-bottom: 2px solid #f44336; padding-bottom: 5px; color: #f44336;">NSFW (후방주의)</h4>
+            <table class="wiki-table" style="width: 100%; font-size: 0.9em; text-align: center;">
+                <tr><th width="30%">코드</th><th>상황</th></tr>
+                <tr><td>A</td><td>정상위</td></tr>
+                <tr><td>B</td><td>정상위 (사정)</td></tr>
+                <tr><td>C</td><td>기승위</td></tr>
+                <tr><td>D</td><td>기승위 (사정)</td></tr>
+                <tr><td>E</td><td>후배위</td></tr>
+                <tr><td>F</td><td>후배위 (사정)</td></tr>
+                <tr><td>G</td><td>파이즈리</td></tr>
+                <tr><td>H</td><td>파이즈리 (사정)</td></tr>
+                <tr><td>I</td><td>펠라치오</td></tr>
+                <tr><td>J</td><td>펠라치오 (딥쓰롯)</td></tr>
+                <tr><td>K</td><td>펠라치오 (사정)</td></tr>
+                <tr><td>L</td><td>입 내부 (정액)</td></tr>
+                <tr><td>M</td><td>삼키기</td></tr>
+                <tr><td>O</td><td>삼킨 후</td></tr>
+            </table>
+        </div>
     </div>
     `
-};
+}
