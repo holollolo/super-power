@@ -3,13 +3,13 @@ export default{
             category: "분류: 범죄자, 테러리스트, 초능력자",
             lastMod: "2019-12-15 14:20:00",
             profile: {
-    image: "https://itimg.kr/2574/1/profile/4.webp",
-    name: "한정연",
-    birth: "1995년 12월 11일<br>(초능력 연구 도시)",
-    residence: "초능력 연구 도시 2지구",
-    nationality: "초능력 연구 도시",
-    job: "자유의 여명 3대 리더"
-},
+                        image: "https://itimg.kr/2574/1/profile/4.webp",
+                        name: "한정연",
+                        birth: "1995년 12월 11일<br>(초능력 연구 도시)",
+                        residence: "초능력 연구 도시 2지구",
+                        nationality: "초능력 연구 도시",
+                        job: "자유의 여명 3대 리더"
+            },
             content: `
         <div class="toc">
             <div class="toc-title">목차</div>
