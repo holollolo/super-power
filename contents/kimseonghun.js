@@ -2,6 +2,14 @@ export default {
             title: "김성훈",
             category: "분류: 기업인, 조폭, 초능력자",
             lastMod: "2019-09-10 11:15:00",
+            profile: {
+    image: "https://itimg.kr/2574/1/profile/17.webp",
+    name: "김성훈",
+    birth: "1985년 4월 1일<br>(초능력 연구 도시)",
+    residence: "초능력 연구 도시 3지구",
+    nationality: "초능력 연구 도시",
+    job: "열락 보스"
+},
             content: `
         <div class="toc">
             <div class="toc-title">목차</div>
@@ -22,4 +30,5 @@ export default {
         <p><b>염동(Psychokinesis) / 4.8단계</b><br>
         사물에 물리력을 행사하여 움직이는 염동력의 소유자. 4.8단계라는 높은 등급에 걸맞게, 건물 잔해를 들어 올리거나 사람을 손대지 않고 찢어발기는 등 압도적인 무력을 행사한다. 활용력이 매우 뛰어나 전투뿐만 아니라 방어, 비행 등 다방면으로 능력을 응용한다.</p>
             `
+
 };
