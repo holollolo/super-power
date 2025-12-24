@@ -226,7 +226,7 @@ export default {
     </div>
 
     <h2 id="s-2">2. 이미지 코드표</h2>
-    <p>원하는 캐릭터와 표정 코드를 조합하여 URL을 완성하세요.</p>
+    <p></p>
     <div class="quote">
         <b>이미지 URL 형식:</b><br>
         <code>https://itimg.kr/2574/0/<span style="color:#e91e63"><b>[캐릭터코드]</b></span>/<span style="color:#2196f3"><b>[상황코드]</b></span>.webp</code>
