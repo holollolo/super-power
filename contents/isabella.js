@@ -2,6 +2,14 @@ export default {
             title: "이사벨라 로시",
             category: "분류: 순수인간연합, 초능력자",
             lastMod: "2019-11-25 10:00:00",
+            profile: {
+    image: "https://itimg.kr/2574/1/profile/28.webp",
+    name: "이사벨라 로시",
+    birth: "1990년 6월 3일<br>(이탈리아)",
+    residence: "초능력 연구 도시",
+    nationality: "이탈리아",
+    job: "순수인간연합 협력자"
+},
             content: `
         <div class="toc">
             <div class="toc-title">목차</div>
@@ -22,4 +30,5 @@ export default {
         <p><b>부여 / 4.6단계</b><br>
         접촉한 대상(인간, 사물)에게 특수한 효과를 부여하거나 능력을 강화시키는 서포트 계열의 최상위 능력자. 그녀의 능력 덕분에 비능력자로 구성된 순수인간연합이 초능력자들과 대등하게 싸울 수 있는 것으로 분석된다. 본인에게 능력을 부여할 경우 전투형 초능력자 못지않은 무력을 발휘한다.</p>
             `
+
 };
