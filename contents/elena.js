@@ -2,6 +2,14 @@ export default{
             title: "엘레나 비아넬로",
             category: "분류: 인플루언서, 초능력자",
             lastMod: "2019-12-05 20:00:00",
+            profile: {
+    image: "https://itimg.kr/2574/1/profile/42.webp",
+    name: "엘레나 비아넬로",
+    birth: "1998년 9월 17일<br>(이탈리아)",
+    residence: "초능력 연구 도시 3지구",
+    nationality: "이탈리아",
+    job: "인플루언서"
+},
             content: `
         <div class="toc">
             <div class="toc-title">목차</div>
@@ -22,4 +30,5 @@ export default{
         <p><b>액체조작 / 3.8단계 & 융해 / 3.9단계</b><br>
         물을 자유자재로 다루는 능력과 대상을 녹여버리는 융해 능력을 지녔다. 방송에서는 주로 물로 예쁜 형상을 만드는 퍼포먼스를 보여주지만, 전투 시에는 모든 것을 녹여버리는 치명적인 산성 용액을 다루는 위협적인 능력자로 변모한다.</p>
             `
+
 };
