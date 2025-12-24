@@ -2,6 +2,14 @@ export default {
               title: "루크 다이어",
             category: "분류: 종교인, 초능력자",
             lastMod: "2019-11-20 09:00:00",
+  profile: {
+    image: "https://itimg.kr/2574/1/profile/8.webp",
+    name: "루크 다이어",
+    birth: "1950년 2월 17일<br>(영국)",
+    residence: "초능력 연구 도시 2지구",
+    nationality: "영국",
+    job: "성운교 교주"
+},
             content: `
         <div class="toc">
             <div class="toc-title">목차</div>
