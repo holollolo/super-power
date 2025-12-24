@@ -2,6 +2,14 @@ export default{
             title: "유라희",
             category: "분류: 한울방범대, 초능력자",
             lastMod: "2019-12-25 14:00:00",
+            profile: {
+    image: "https://itimg.kr/2574/1/profile/12.webp",
+    name: "유라희",
+    birth: "1995년 6월 25일<br>(초능력 연구 도시)",
+    residence: "초능력 연구 도시 2지구",
+    nationality: "초능력 연구 도시",
+    job: "한울방범대 대원"
+},
             content: `
         <div class="toc">
             <div class="toc-title">목차</div>
@@ -22,5 +30,6 @@ export default{
         <p><b>초가속화 / 5.3단계 & 벼락 / 5단계</b><br>
         자신과 주변의 시간을 가속하는 능력과 벼락을 내리꽂는 능력을 동시에 사용한다. 두 능력이 시너지를 일으켜, 목격자들의 증언에 따르면 "번개보다 빠르게 움직이며 적을 잿더미로 만든다"고 한다. 도시 내에서 손꼽히는 재앙급 전투력 보유자다.</p>
             `
+
 
 };
