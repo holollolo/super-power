@@ -223,7 +223,7 @@ export default {
             <img src="https://itimg.kr/2574/1/profile/53.webp" class="char-img" onclick="window.open(this.src)">
             <div class="char-name">미네</div>
         </div>
-        <h2 id="s-2">2. 이미지 링크</h2>
+        <h2 id="s-2">2. 이미지 링크<br></h2>
     <p>형식: ![](https://itimg.kr/2574/0/(캐릭터코드)/(상황코드).webp)<br>
     [캐릭터 코드]<br>
 캐릭터 이름|캐릭터 코드<br>
