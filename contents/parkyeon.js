@@ -2,6 +2,14 @@ export default{
             title: "박연",
             category: "분류: 공무원, 초능력자",
             lastMod: "2019-12-01 13:40:00",
+            profile: {
+    image: "https://itimg.kr/2574/1/profile/36.webp",
+    name: "박연",
+    birth: "1995년 2월 13일<br>(대한민국)",
+    residence: "초능력 연구 도시 4지구",
+    nationality: "대한민국",
+    job: "초능격리부 격리유지과 과장"
+},
             content: `
         <div class="toc">
             <div class="toc-title">목차</div>
@@ -22,4 +30,5 @@ export default{
         <p><b>섬유 조작 / 5.6단계</b><br>
         실이나 옷감 등의 섬유를 자유자재로 조작하고 강화하는 능력. 평범한 실을 강철보다 단단하게 만들어 적을 절단하거나 포박한다. 5.6단계라는 수치가 보여주듯, 그녀의 섬유는 전차의 장갑도 우습게 뚫어버리는 위력을 자랑한다. 격리유지과의 철벽 방어는 그녀의 능력에 기반한다.</p>
             `
+
 };
