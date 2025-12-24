@@ -1,0 +1,7 @@
+export default {
+    title: "캐릭터 리스트 및 외형",
+    category: "NON - RP",
+    lastMod: "NON - RP",
+    content: `
+    `
+};
