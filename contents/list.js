@@ -1,5 +1,5 @@
 export default {
-    title: "캐릭터 리스트 및 외형",
+    title: "NON - RP",
     category: "NON - RP",
     lastMod: "2025-12-24 14:30:00",
     content: `
