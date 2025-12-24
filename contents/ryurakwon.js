@@ -2,6 +2,14 @@ export default{
             title: "류락원",
             category: "분류: 기업인, 농업인, 초능력자",
             lastMod: "2019-06-25 10:00:00",
+            profile: {
+    image: "https://itimg.kr/2574/1/profile/9.webp",
+    name: "류락원",
+    birth: "1960년 9월 21일<br>(북한)",
+    residence: "초능력 연구 도시 2지구",
+    nationality: "초능력 연구 도시 (북한)",
+    job: "락원농장 주인"
+},
             content: `
         <div class="toc">
             <div class="toc-title">목차</div>
@@ -22,4 +30,5 @@ export default{
         <p><b>관리 / 4.3단계 & 증폭 / 4단계</b><br>
         자신 소유의 영역과 대상에 대한 정보를 파악하는 '관리' 능력과, 생명이나 에너지를 증폭시키는 '증폭' 능력을 보유했다. 이 능력 덕분에 락원농장은 척박한 환경에서도 비정상적으로 높은 생산량을 유지한다. 전투 시에는 아군을 강화하거나 전장을 장악하는 방식으로 무력을 행사한다.</p>
             `
+
 };
