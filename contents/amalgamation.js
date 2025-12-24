@@ -2,7 +2,7 @@ export default {
             title: "융합의 재앙",
             category: "분류: 재앙, 괴수",
             lastMod: "2019-11-15 03:33:00",
-            image: "https://itimg.kr/2574/0/0.webp",
+            image: "https://itimg.kr/2574/1/0.webp",
             isSpoiler: true,
             content: `
         <div class="toc">
