@@ -2,6 +2,14 @@ export default{
             title: "피아 슈탈",
             category: "분류: 장인, 예술가, 초능력자",
             lastMod: "2019-09-20 16:30:00",
+            profile: {
+    image: "https://itimg.kr/2574/1/profile/51.webp",
+    name: "피아 슈탈",
+    birth: "2000년 7월 7일<br>(초능력 연구 도시)",
+    residence: "초능력 연구 도시 5지구",
+    nationality: "초능력 연구 도시",
+    job: "올림푸스 주인"
+},
             content: `
         <div class="toc">
             <div class="toc-title">목차</div>
@@ -22,4 +30,5 @@ export default{
         <p><b>헤파이스토스 / 3.8단계 & 무사이 / 4단계</b><br>
         대장장이의 신과 예술의 여신의 이름을 딴 이중 초능력. 불과 용암을 다루는 야금술 능력에 예술적인 영감이 더해져, 세상에 단 하나뿐인 명검이나 명품을 탄생시킨다. 전투 시에는 망치를 휘두르며 불꽃을 일으키는 전사로 돌변한다.</p>
             `
+
 };
