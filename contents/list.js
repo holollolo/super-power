@@ -294,7 +294,7 @@ export default {
             </table>
         </div>
         <div style="flex: 1; min-width: 250px;">
-            <h4 style="border-bottom: 2px solid #f44336; padding-bottom: 5px; color: #f44336;">NSFW (후방주의)</h4>
+            <h4 style="border-bottom: 2px solid #f44336; padding-bottom: 5px; color: #f44336;">NSFW</h4>
             <table class="wiki-table" style="width: 100%; font-size: 0.9em; text-align: center;">
                 <tr><th width="30%">코드</th><th>상황</th></tr>
                 <tr><td>A</td><td>정상위</td></tr>
