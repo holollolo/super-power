@@ -2,6 +2,14 @@ export default{
             title: "장현호",
             category: "분류: 테러리스트, 비능력자",
             lastMod: "2019-10-15 18:30:00",
+            profile: {
+    image: "https://itimg.kr/2574/1/profile/27.webp",
+    name: "장현호",
+    birth: "1975년 6월 6일<br>(초능력 연구 도시)",
+    residence: "초능력 연구 도시 5지구",
+    nationality: "초능력 연구 도시",
+    job: "순수인간연합 리더"
+},
             content: `
         <div class="toc">
             <div class="toc-title">목차</div>
@@ -21,4 +29,5 @@ export default{
         <h2 id="s-3">3. 위험성</h2>
         <p>개인의 무력은 일반인 수준이나, 그의 위험 등급은 웬만한 고단계 초능력자보다 높게 책정되어 있다. 조직 운영, 보급, 심리전에 통달해 있으며, 그가 주도한 테러는 항상 다수의 초능력자 사상자를 발생시킨다.</p>
             `
+
 };
