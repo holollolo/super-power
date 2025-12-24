@@ -2,7 +2,7 @@ export default {
             title: "정화의 재앙",
             category: "분류: 재앙, 괴수",
             lastMod: "2019-11-11 05:55:00",
-            image: "https://itimg.kr/2574/0/2.webp",
+            image: "https://itimg.kr/2574/1/2.webp",
             isSpoiler: true,
             content: `
         <div class="toc">
