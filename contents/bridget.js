@@ -9,7 +9,7 @@ export default {
                         residence: "초능력 연구 도시",
                         nationality: "초능력 연구 도시",
                         job: "톱니 주인"
-                }
+                },
             content: `
         <div class="toc">
             <div class="toc-title">목차</div>
@@ -32,3 +32,4 @@ export default {
             `
 
 };
+
