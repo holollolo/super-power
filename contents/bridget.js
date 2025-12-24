@@ -3,13 +3,13 @@ export default {
             category: "분류: 장인, 초능력자",
             lastMod: "2019-08-15 12:00:00",
             profile: {
-                        image: "https://itimg.kr/2574/1/profile/50.webp",
-                        name: "브리짓 갤러거",
-                        birth: "1999년 4월 19일<br>(아일랜드)",
-                        residence: "초능력 연구 도시",
-                        nationality: "초능력 연구 도시",
-                        job: "톱니 주인"
-                },
+    image: "https://itimg.kr/2574/1/profile/50.webp",
+    name: "브리짓 갤러거",
+    birth: "1999년 4월 19일<br>(아일랜드)",
+    residence: "초능력 연구 도시 5지구",
+    nationality: "아일랜드",
+    job: "톱니 주인"
+},
             content: `
         <div class="toc">
             <div class="toc-title">목차</div>
@@ -32,4 +32,5 @@ export default {
             `
 
 };
+
 
