@@ -2,6 +2,14 @@ export default{
             title: "남궁철호",
             category: "분류: 무소속, 초능력자, 무인",
             lastMod: "2019-11-11 11:11:00",
+            profile: {
+    image: "https://itimg.kr/2574/1/profile/45.webp",
+    name: "남궁철호",
+    birth: "1930년 10월 1일<br>(중국)",
+    residence: "초능력 연구 도시",
+    nationality: "중국",
+    job: "무소속"
+},
             content: `
         <div class="toc">
             <div class="toc-title">목차</div>
@@ -22,5 +30,6 @@ export default{
         <p><b>신검합일(身劍合一) / 4.999…단계 (추정)</b><br>
         단순한 신체 강화를 넘어, 검술의 경지에 비례해 신체 능력이 상승하는 특이 케이스. 사실상 <b>5단계에 가장 근접한 초인</b>으로 평가받는다. 그가 휘두르는 검은 공간을 가르는 듯한 위력을 보여주며, 단순한 검술만으로도 이능력을 압도하는 기행을 보여준다.</p>
             `
+
 
 };
