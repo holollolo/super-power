@@ -2,6 +2,14 @@ export default {
             title: "제시카 미첼",
             category: "분류: 범죄자, 군벌, 초능력자",
             lastMod: "2019-12-30 22:00:00",
+            profile: {
+    image: "https://itimg.kr/2574/1/profile/31.webp",
+    name: "제시카 미첼",
+    birth: "1993년 7월 11일<br>(미국)",
+    residence: "초능력 연구 도시 8지구",
+    nationality: "미국",
+    job: "프레데터 보스"
+},
             content: `
         <div class="toc">
             <div class="toc-title">목차</div>
@@ -22,4 +30,5 @@ export default {
         <p><b>폭발 / 5.5단계 & 적상아치(敵傷我治) / 5단계</b><br>
         걸어 다니는 전략 무기. 단순 화력만으로도 국가급 전력인 '폭발' 능력에, 적에게 입힌 상처만큼 자신을 회복하는 '적상아치' 능력이 더해져 사실상 불사신에 가까운 전투 지속력을 보여준다. 그녀와 전면전을 벌이는 것은 자살행위로 간주된다.</p>
             `
+
 };
