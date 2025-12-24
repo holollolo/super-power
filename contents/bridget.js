@@ -2,6 +2,14 @@ export default {
             title: "브리짓 갤러거",
             category: "분류: 장인, 초능력자",
             lastMod: "2019-08-15 12:00:00",
+            profile: {
+                        image: "https://itimg.kr/2574/1/profile/50.webp",
+                        name: "브리짓 갤러거",
+                        birth: "1999년 4월 19일<br>(아일랜드)",
+                        residence: "초능력 연구 도시",
+                        nationality: "초능력 연구 도시",
+                        job: "톱니 주인"
+                }
             content: `
         <div class="toc">
             <div class="toc-title">목차</div>
@@ -22,4 +30,5 @@ export default {
         <p><b>톱니 공방의 주인 / 5.4단계</b><br>
         자신의 공방 영역 내에서는 기계 제작과 조작에 있어 전지전능에 가까운 능력을 발휘한다. 심지어 공방의 공간 자체를 복사하여 외부에 덮어씌우는 방식으로 전투를 수행하기도 한다. 단순한 제작 계열을 넘어선 공간 장악형 능력이다.</p>
             `
+
 };
